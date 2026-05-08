@@ -1,76 +1,173 @@
-# Gerador de Documentação de Testes (.DOCX)
+# QA Control Center
 
-Automatizador em **Node.js** para gerar documentos `.docx` padronizados a partir de cenários de teste escritos em **JSON**.
+Plataforma de gerenciamento, documentação e execução de testes para times de QA.
 
-Ideal para times de **QA**, **Analistas de Testes**, **POs** e squads que precisam criar documentação rápida, bonita e repetível sem sofrer no Word.
+O QA Control Center permite criar projetos de teste, organizar cenários em Gherkin, salvar tudo em banco de dados, exportar documentação `.docx` e futuramente executar testes com rastreabilidade completa.
 
 
-## 🚀 Objetivo
+# Visão Geral
 
-Transformar isso:
+O projeto nasceu como um gerador de documentação `.docx` para QA.
 
-```json
-{
-  "titulo": "CA1 — Integração com OAM",
-  "cenarios": [...]
-}
+Hoje evoluiu para uma plataforma completa de:
+
+- gerenciamento de cenários
+- documentação de testes
+- persistência em PostgreSQL
+- execução de testes
+- rastreabilidade
+- geração de relatórios
+- exportação de evidências
+
+Inspirado em ferramentas como:
+
+- Xray
+- QMetry
+- TestRail
+- Jira Test Management
+
+
+# Principais Funcionalidades
+
+## Gestão de Projetos
+
+- criação de projetos de teste
+- descrição funcional
+- organização por feature
+
+
+## Gestão de Cenários
+
+- criação dinâmica de cenários
+- categorização:
+  - Happy Path
+  - Sad Path
+  - Regression
+  - Validation
+  - Smoke Test
+  - Security
+  - etc
+
+
+## Escrita Gherkin
+
+Suporte para:
+
+```gherkin
+Given ...
+When ...
+Then ...
 ```
-Nisso:
-
-* Documento `.docx` formatado
-* Header com logo da empresa
-* Capa personalizada
-* Cenários em Gherkin
-* Arquivos separados por história/teste
 
 
-## 📁 Estrutura do Projeto
+## Persistência em Banco
+
+Todos os projetos e cenários são armazenados em PostgreSQL.
+
+
+## Exportações
+
+- DOCX
+- JSON
+
+
+## Execução de Testes (em evolução)
+
+Status disponíveis:
+
+- PASSED
+- FAILED
+- BLOCKED
+- N/A
+
+Com suporte planejado para:
+
+- evidências
+- comentários
+- relatórios
+- histórico de execução
+
+
+# Arquitetura
+
+## Frontend
+
+- React
+- Vite
+- CSS customizado
+
+
+## Backend
+
+- Node.js
+- Express
+
+
+## Banco de Dados
+
+- PostgreSQL
+
+
+# Estrutura do Projeto
 
 ```bash
-gerador_de_doc_de_teste/
-│── assets/
-│   └── vivo_logo.png
+qa-control-center/
 │
-│── config/
-│   └── style.js
+├── backend/
+│   ├── src/
+│   │   ├── routes/
+│   │   ├── db.js
+│   │   ├── init-db.js
+│   │   └── app.js
 │
-│── data/
-│   └── historias.json
+├── dashboard/
+│   ├── src/
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   └── main.jsx
 │
-│── templates/
-│   ├── cover.js
-│   ├── header.js
-│   └── docTemplate.js
+├── Testes/
 │
-│── Testes/
-│   └── (arquivos gerados)
-│
-│── generator.js
-│── package.json
-│── README.md
+└── README.md
 ```
 
 
-## ⚙️ Tecnologias Utilizadas
+# Tecnologias Utilizadas
 
-* Node.js
-* docx
-* JavaScript
-* JSON
+## Frontend
+
+- React
+- Vite
+
+## Backend
+
+- Node.js
+- Express
+
+## Database
+
+- PostgreSQL
+
+## Documentação
+
+- docx
 
 
-## 📦 Instalação
+# Instalação
 
-Clone o projeto:
+## Clone o projeto
 
 ```bash
 git clone https://github.com/FragaKleverson/gerador_de_doc_de_teste.git
 ```
 
+
+# Backend
+
 Entre na pasta:
 
 ```bash
-cd gerador_de_doc_de_teste
+cd backend
 ```
 
 Instale dependências:
@@ -79,141 +176,105 @@ Instale dependências:
 npm install
 ```
 
-
-## ▶️ Como Executar
-
-```bash
-node generator.js
-```
-
-
-## 📄 Resultado
-
-Os arquivos serão gerados automaticamente na pasta:
+Execute:
 
 ```bash
-./Testes/
+node src/app.js
 ```
 
-Exemplo:
+Servidor:
 
 ```bash
-ca1_integracao_oam.docx
-ca2_api_autenticacao_aura.docx
-ca3_middleware_bot.docx
+http://localhost:3001
 ```
 
 
-## 🧠 Como Adicionar Novos Testes
+# Frontend
 
-Edite o arquivo:
+Entre na pasta:
 
 ```bash
-data/historias.json
+cd dashboard
 ```
 
-Modelo:
-
-```json
-[
-  {
-    "titulo": "CA1 — Integração com OAM",
-    "descricao": "Validação da autenticação",
-    "feature": "Integração OAM",
-    "fileName": "ca1_integracao_oam",
-    "background": [
-      "Given sistema disponível"
-    ],
-    "cenarios": [
-      {
-        "nome": "JWT válido",
-        "tipo": "success",
-        "passos": [
-          "Given token válido",
-          "When enviar requisição",
-          "Then retorna 200"
-        ]
-      }
-    ]
-  }
-]
-```
-
-
-## 🎨 Personalização Visual
-
-Edite:
+Instale dependências:
 
 ```bash
-config/style.js
+npm install
 ```
 
-Você pode alterar:
-
-* cores
-* fontes
-* título da capa
-* subtítulo
-* versão
-* descrição
-
-
-## 🖼️ Logo da Empresa
-
-Adicione sua logo em:
+Execute:
 
 ```bash
-assets/vivo_logo.png
+npm run dev
 ```
 
-Se quiser trocar:
-
-1. substitua a imagem
-2. ajuste o nome em:
+Frontend:
 
 ```bash
-templates/header.js
+http://localhost:5173
 ```
 
 
-## 💡 Casos de Uso
+# Banco de Dados
 
-* Documento de casos de teste
-* Evidência para homologação
-* Regressão documentada
-* Entregas para cliente
-* Features em Gherkin
-* Histórico de testes por sprint
+Necessário:
 
+- PostgreSQL
 
-## 🔥 Próximas Evoluções
+Execute:
 
-* Exportar PDF
-* Gerar ZIP automático
-* Dashboard HTML
-* Integração Cypress / Playwright
-* Evidência automática pós execução
-* Pipeline CI/CD
-
-
-## 🤝 Contribuição
-
-Sugestões e melhorias são bem-vindas.
-
-Faça um fork, melhore e mande PR.
-
-
-## 👨‍💻 Autor
-
-Desenvolvido por **Kleverson Fraga Costa**
-QA Analyst | Automação | Processos |
-
-
-## 😏 Resumo sincero
-
-Se você ainda cria documentação manual no Word...
-
-esse projeto veio pra acabar com seu sofrimento.
-
+```bash
+node src/init-db.js
 ```
-```
+
+Tabelas criadas:
+
+- projetos
+- cenarios
+- test_runs
+- test_executions
+
+
+# Roadmap
+
+## Próximas evoluções
+
+- autenticação de usuários
+- upload de evidências
+- screenshots automáticas
+- dashboard analítico
+- gráficos QA
+- integração Cypress
+- integração Playwright
+- relatórios PDF
+- execução automatizada
+- CI/CD
+- histórico de execução
+- permissões por perfil
+
+
+# Objetivo do Projeto
+
+Centralizar todo o fluxo de QA em uma única plataforma:
+
+- documentação
+- gerenciamento
+- execução
+- rastreabilidade
+- evidências
+- relatórios
+
+
+# Autor
+
+Kleverson Fraga Costa
+
+QA Analyst | Test Automation | Quality Engineering
+
+
+# Resumo sincero
+
+Se você ainda controla testes em Excel, Word e print no Teams...
+
+talvez esteja na hora de evoluir.
